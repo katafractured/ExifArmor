@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		BCD448952F709508003C74BE /* ExifArmorShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BCD4488B2F709508003C74BE /* ExifArmorShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		BCD448152F708AEF003C74BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +25,60 @@
 			remoteGlobalIDString = BCD448062F708AEC003C74BE;
 			remoteInfo = ExifArmor;
 		};
+		BCD448932F709508003C74BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCD447FF2F708AEC003C74BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCD4488A2F709508003C74BE;
+			remoteInfo = ExifArmorShareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BCD4489A2F709508003C74BE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BCD448952F709508003C74BE /* ExifArmorShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BC3806392F70F05800CE6623 /* ExifArmor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExifArmor.entitlements; sourceTree = "<group>"; };
 		BCD448072F708AEC003C74BE /* ExifArmor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExifArmor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD448142F708AEF003C74BE /* ExifArmorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExifArmorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD4481E2F708AEF003C74BE /* ExifArmorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExifArmorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCD4488B2F709508003C74BE /* ExifArmorShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ExifArmorShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BCD448A42F7098F5003C74BE /* Exceptions for "ExifArmor" folder in "ExifArmor" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BCD448062F708AEC003C74BE /* ExifArmor */;
+		};
+		BCD448AB2F70B000003C74BE /* Exceptions for "ExifArmorShareExtension" folder in "ExifArmorShareExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BCD4488A2F709508003C74BE /* ExifArmorShareExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BCD448092F708AEC003C74BE /* ExifArmor */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BCD448A42F7098F5003C74BE /* Exceptions for "ExifArmor" folder in "ExifArmor" target */,
+			);
 			path = ExifArmor;
 			sourceTree = "<group>";
 		};
@@ -43,6 +90,14 @@
 		BCD448212F708AEF003C74BE /* ExifArmorUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ExifArmorUITests;
+			sourceTree = "<group>";
+		};
+		BCD4488C2F709508003C74BE /* ExifArmorShareExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BCD448AB2F70B000003C74BE /* Exceptions for "ExifArmorShareExtension" folder in "ExifArmorShareExtension" target */,
+			);
+			path = ExifArmorShareExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +124,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BCD448882F709508003C74BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,7 +140,9 @@
 				BCD448092F708AEC003C74BE /* ExifArmor */,
 				BCD448172F708AEF003C74BE /* ExifArmorTests */,
 				BCD448212F708AEF003C74BE /* ExifArmorUITests */,
+				BCD4488C2F709508003C74BE /* ExifArmorShareExtension */,
 				BCD448082F708AEC003C74BE /* Products */,
+				BC3806392F70F05800CE6623 /* ExifArmor.entitlements */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +152,7 @@
 				BCD448072F708AEC003C74BE /* ExifArmor.app */,
 				BCD448142F708AEF003C74BE /* ExifArmorTests.xctest */,
 				BCD4481E2F708AEF003C74BE /* ExifArmorUITests.xctest */,
+				BCD4488B2F709508003C74BE /* ExifArmorShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,10 +167,12 @@
 				BCD448032F708AEC003C74BE /* Sources */,
 				BCD448042F708AEC003C74BE /* Frameworks */,
 				BCD448052F708AEC003C74BE /* Resources */,
+				BCD4489A2F709508003C74BE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BCD448942F709508003C74BE /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BCD448092F708AEC003C74BE /* ExifArmor */,
@@ -163,6 +230,28 @@
 			productReference = BCD4481E2F708AEF003C74BE /* ExifArmorUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BCD4488A2F709508003C74BE /* ExifArmorShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCD448972F709508003C74BE /* Build configuration list for PBXNativeTarget "ExifArmorShareExtension" */;
+			buildPhases = (
+				BCD448872F709508003C74BE /* Sources */,
+				BCD448882F709508003C74BE /* Frameworks */,
+				BCD448892F709508003C74BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BCD4488C2F709508003C74BE /* ExifArmorShareExtension */,
+			);
+			name = ExifArmorShareExtension;
+			packageProductDependencies = (
+			);
+			productName = ExifArmorShareExtension;
+			productReference = BCD4488B2F709508003C74BE /* ExifArmorShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +273,9 @@
 						CreatedOnToolsVersion = 26.3;
 						TestTargetID = BCD448062F708AEC003C74BE;
 					};
+					BCD4488A2F709508003C74BE = {
+						CreatedOnToolsVersion = 26.3;
+					};
 				};
 			};
 			buildConfigurationList = BCD448022F708AEC003C74BE /* Build configuration list for PBXProject "ExifArmor" */;
@@ -203,6 +295,7 @@
 				BCD448062F708AEC003C74BE /* ExifArmor */,
 				BCD448132F708AEF003C74BE /* ExifArmorTests */,
 				BCD4481D2F708AEF003C74BE /* ExifArmorUITests */,
+				BCD4488A2F709508003C74BE /* ExifArmorShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +316,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BCD4481C2F708AEF003C74BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCD448892F709508003C74BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +353,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BCD448872F709508003C74BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +372,11 @@
 			isa = PBXTargetDependency;
 			target = BCD448062F708AEC003C74BE /* ExifArmor */;
 			targetProxy = BCD4481F2F708AEF003C74BE /* PBXContainerItemProxy */;
+		};
+		BCD448942F709508003C74BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCD4488A2F709508003C74BE /* ExifArmorShareExtension */;
+			targetProxy = BCD448932F709508003C74BE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -327,6 +439,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -383,6 +496,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -393,10 +507,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = ExifArmor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = 2SGGP65W6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExifArmor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ExifArmor: Photo Privacy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Katafract LLC";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -406,9 +528,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmor;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -424,10 +547,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = ExifArmor.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = 2SGGP65W6C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExifArmor/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "ExifArmor: Photo Privacy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Katafract LLC";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -437,9 +568,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmor;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -458,8 +590,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmorTests;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmortests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -479,8 +611,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmorTests;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmortests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -498,8 +630,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmorUITests;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmoruitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -517,8 +649,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.ExifArmorUITests;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.katafract.exifarmoruitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -527,6 +659,66 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = ExifArmor;
+			};
+			name = Release;
+		};
+		BCD448982F709508003C74BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ExifArmorShareExtension/ExifArmorShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = 2SGGP65W6C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExifArmorShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ExifArmorShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Katafract LLC";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.katafract.exifarmor.share-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCD448992F709508003C74BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ExifArmorShareExtension/ExifArmorShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = 2SGGP65W6C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ExifArmorShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ExifArmorShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Katafract LLC";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.katafract.exifarmor.share-extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -565,6 +757,15 @@
 			buildConfigurations = (
 				BCD4482F2F708AEF003C74BE /* Debug */,
 				BCD448302F708AEF003C74BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCD448972F709508003C74BE /* Build configuration list for PBXNativeTarget "ExifArmorShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCD448982F709508003C74BE /* Debug */,
+				BCD448992F709508003C74BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,12 @@
+{
+  "images": [
+    {
+      "filename": "badge_1000_photos.png",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "version": 1,
+    "author": "exifarmor-generator"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "images": [
+    {
+      "filename": "empty_no_photos.png",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "version": 1,
+    "author": "exifarmor-generator"
+  }
+}
