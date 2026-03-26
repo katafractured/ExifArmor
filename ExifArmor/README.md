@@ -1,172 +1,159 @@
-# ExifArmor — Xcode Project Setup Guide
+# ExifArmor
 
-## Quick Start (15 minutes)
+ExifArmor is an iPhone app for inspecting and removing privacy-sensitive metadata from photos and videos before sharing them.
 
-### 1. Create the Xcode Project
+It focuses on one job:
 
-1. Open Xcode → File → New → Project
-2. Choose **App** under iOS
-3. Settings:
-   - **Product Name:** ExifArmor
-   - **Team:** Your Apple Developer Team
-   - **Organization Identifier:** com.katafract (match what you'll use in App Store Connect)
-   - **Interface:** SwiftUI
-   - **Language:** Swift
-   - **Minimum Deployment:** iOS 17.0
-4. Create the project
+- show what a file reveals
+- remove the metadata you choose
+- keep everything on-device
 
-### 2. Add the Source Files
+The project is open source. The App Store version is the maintained, signed, compiled distribution for end users.
 
-1. In Xcode's Project Navigator, delete the auto-generated `ContentView.swift`
-2. Drag the following folders from this package into the `ExifArmor` group:
-   - `App/`
-   - `Models/`
-   - `Services/`
-   - `ViewModels/`
-   - `Views/`
-   - `Extensions/`
-3. When prompted: ✅ Copy items if needed, ✅ Create groups, Target: ExifArmor
+## What The App Does
 
-### 3. Add the Asset Catalog
+ExifArmor can analyze media for:
 
-Replace the default `Assets.xcassets` with the one from the asset package we built earlier:
-1. Delete the default `Assets.xcassets` from the project
-2. Drag in `ExifArmor-Xcode/Assets.xcassets` from the asset package
-3. Verify it contains: AppIcon, 9 Color Sets, Onboarding/Empty/Badge image sets
+- GPS location
+- creation date and time
+- device make and model
+- software tags
+- camera settings
+- video metadata such as location, recording date, and device tags
 
-### 4. Add the Info.plist
+It can then create cleaned copies without touching the original file.
 
-1. Drag `Info.plist` into the ExifArmor group
-2. In Build Settings → search "Info.plist File" → set to `ExifArmor/Info.plist`
-3. This includes photo library permission strings and launch screen config
+Current capabilities include:
 
-### 5. Set Up the Share Extension
+- photo metadata inspection
+- video metadata inspection
+- selective stripping templates
+- before/after metadata report view
+- Live Photo awareness
+- batch processing
+- share-ready cleaned exports
+- local-only privacy report tracking
 
-1. File → New → Target → **Share Extension**
-2. Product Name: `ExifArmorShareExtension`
-3. Delete the auto-generated files in the new target
-4. Drag in the files from `ExifArmorShareExtension/`:
-   - `ShareViewController.swift`
-   - `Info.plist`
-5. In the extension's Build Settings, set its Info.plist path
+## Privacy Model
 
-### 6. Configure App Groups
+ExifArmor is designed around a strict local-first rule set:
 
-Both the main app and share extension need to share data:
+- no custom backend
+- no cloud sync
+- no analytics SDKs
+- no photo uploads
+- no third-party dependencies
 
-1. Select the **ExifArmor** target → Signing & Capabilities → + Capability → App Groups
-2. Add: `group.com.katafract.exifarmor`
-3. Select the **ExifArmorShareExtension** target → same steps → same group ID
-4. Update the `appGroupID` string in `PrivacyReportManager.swift` and `ShareViewController.swift` to match
+All media processing happens on-device.
 
-### 7. Configure StoreKit
+The only network-adjacent behavior is Apple-managed commerce when using StoreKit for purchases and tips.
 
-1. Drag `StoreKitConfig/ExifArmorProducts.storekit` into the project
-2. Edit Scheme → Run → Options → StoreKit Configuration → select `ExifArmorProducts.storekit`
-3. This enables testing purchases in the Simulator without App Store Connect
+## Open Source Vs App Store Build
 
-**Before submitting to App Store Connect:**
-- Create the product `com.katafract.ExifArmor.Pro` as a Non-Consumable IAP
-- This is a $3.99 one-time unlock for unlimited strips, the premium share extension, batch mode, custom strip options, and privacy report progress
-- Update `StoreManager.proProductID` if you use a different product ID
-- Remove the StoreKit configuration from the scheme (it overrides real products)
+This repository contains the source code for ExifArmor.
 
-### 8. Update Bundle Identifiers
+The App Store/TestFlight app is:
 
-Search and replace these placeholder values across the project:
+- signed by the developer account
+- compiled and distributed by Apple
+- the easiest way for most people to use the app
 
-| Placeholder | Replace With |
-|---|---|
-| `com.katafract.exifarmor` | Your actual bundle ID |
-| `com.katafract.ExifArmor.Pro` | Your IAP product ID |
-| `group.com.katafract.exifarmor` | Your App Group ID |
-| `YOUR_TEAM_ID` | Your Apple Developer Team ID |
+The open-source repository is for:
 
----
+- transparency
+- auditing the privacy model
+- local builds
+- contributions and experimentation
+
+If you want the consumer-ready build, use the App Store or TestFlight release. If you want to inspect or modify the app, use this repository.
+
+## Tech Stack
+
+- Swift
+- SwiftUI
+- Observation (`@Observable`)
+- ImageIO for photo metadata reads/writes
+- AVFoundation for video metadata reads/writes
+- StoreKit 2 for purchases
+- UserDefaults and App Groups for local persistence
+
+Minimum target:
+
+- iOS 17+
 
 ## Project Structure
 
-```
+```text
 ExifArmor/
-├── App/
-│   ├── ExifArmorApp.swift          # Entry point, onboarding gate
-│   └── MainTabView.swift            # Tab bar (Strip, Report, Settings)
-├── Models/
-│   ├── PhotoMetadata.swift          # EXIF data model
-│   └── StripOptions.swift           # Strip configuration + StripResult
-├── Services/
-│   ├── MetadataService.swift        # Reads EXIF via ImageIO
-│   ├── StripService.swift           # Creates clean copies via ImageIO
-│   ├── StoreManager.swift           # StoreKit 2 IAP ($3.99 one-time Pro unlock)
-│   ├── PrivacyReportManager.swift   # Lifetime stats (App Group shared)
-│   ├── FreeTierManager.swift        # 5 strips/day gating
-│   └── AnalyticsLogger.swift        # On-device conversion funnel tracker
-├── ViewModels/
-│   └── PhotoStripViewModel.swift    # Core workflow: pick → analyze → strip
-├── Views/
-│   ├── HomeView.swift               # Main screen + photo picker
-│   ├── ExposurePreviewView.swift    # "What your photo reveals" with map
-│   ├── StripResultView.swift        # Success screen + save/share
-│   ├── StripOptionsSheet.swift      # Custom strip category picker
-│   ├── PrivacyReportView.swift      # Gamified stats + badges
-│   ├── OnboardingView.swift         # 3-page intro
-│   ├── ProUpgradeView.swift         # IAP purchase screen
-│   ├── SettingsView.swift           # Settings + restore purchase
-│   ├── AnalyticsDebugView.swift     # DEBUG: conversion funnel viewer
-│   └── Components/
-│       └── MetadataCard.swift       # Reusable metadata display card
-├── Extensions/
-│   └── Color+Theme.swift            # Fallback colors + palette reference
-├── Info.plist
-│
+├── ExifArmor/
+│   ├── App/
+│   ├── Extensions/
+│   ├── Models/
+│   ├── Services/
+│   ├── ViewModels/
+│   └── Views/
+├── ExifArmorTests/
+├── ExifArmorUITests/
 ├── ExifArmorShareExtension/
-│   ├── ShareViewController.swift    # Premium share extension (clean, then share onward)
-│   └── Info.plist
-│
+├── AppStore/
 └── StoreKitConfig/
-    └── ExifArmorProducts.storekit  # Local IAP testing config
 ```
 
----
+Important areas:
 
-## Key Architecture Decisions
+- [ExifArmorApp.swift](./ExifArmor/ExifArmor/App/ExifArmorApp.swift): app entry point
+- [PhotoStripViewModel.swift](./ExifArmor/ExifArmor/ViewModels/PhotoStripViewModel.swift): main media workflow
+- [MetadataService.swift](./ExifArmor/ExifArmor/Services/MetadataService.swift): photo metadata extraction
+- [StripService.swift](./ExifArmor/ExifArmor/Services/StripService.swift): photo metadata stripping
+- [VideoMetadataService.swift](./ExifArmor/ExifArmor/Services/VideoMetadataService.swift): video metadata extraction
+- [VideoStripService.swift](./ExifArmor/ExifArmor/Services/VideoStripService.swift): video metadata stripping
+- [ShareViewController.swift](./ExifArmorShareExtension/ShareViewController.swift): share extension
 
-1. **Never modify originals.** `StripService` creates a new image via `CGImageDestination` — zero quality loss, original untouched.
+## Building From Source
 
-2. **No networking.** The app never makes network calls. The analytics logger stores everything in UserDefaults on-device.
+Requirements:
 
-3. **StoreKit 2 native.** Single non-consumable product. Transactions are cryptographically verified on-device by Apple's JWS signing. No server-side receipt validation needed.
+- Xcode 16 or newer
+- iOS 17 SDK
+- an Apple Developer account if you want to run on device or test StoreKit and extension flows fully
 
-4. **App Group sharing.** The privacy report counter is shared between the main app and share extension via `UserDefaults(suiteName:)`.
+Basic setup:
 
-5. **@Observable (iOS 17+).** All state managers use the Observation framework instead of ObservableObject/Published for cleaner code and better performance.
+1. Open the project in Xcode.
+2. Configure your signing team for the app and share extension.
+3. Confirm the App Group matches your developer account setup.
+4. Attach the local StoreKit config if you want Simulator purchase testing.
+5. Build and run on Simulator or device.
 
----
+StoreKit config file:
 
-## Analytics Funnel
+- [ExifArmorProducts.storekit](./ExifArmorProducts.storekit)
 
-The `AnalyticsLogger` tracks this conversion funnel entirely on-device:
+## Distribution Notes
 
-```
-App Launch → Onboarding → Photos Selected → Exposure Preview → Strip → Paywall → Purchase
-```
+This repository may move faster than the App Store release.
 
-View the funnel in DEBUG builds: Settings → Analytics Debug
+That means:
 
-Export as JSON for your own analysis.
+- GitHub can contain features or fixes not yet available in the public build
+- the App Store build can have a higher review and stability bar
+- TestFlight builds may temporarily lead or trail `main`
 
----
+## Contributing
 
-## Testing Checklist
+Contributions are welcome, but the project has a few non-negotiable constraints:
 
-- [ ] Photo picker loads and selections work
-- [ ] EXIF data displays correctly (test with a photo that has GPS)
-- [ ] Map pin appears for geotagged photos
-- [ ] Strip creates a clean copy (verify no EXIF in saved photo)
-- [ ] Free tier blocks after 5 strips
-- [ ] StoreKit purchase flow works (use StoreKit config)
-- [ ] Premium share extension appears in share sheet for Pro users
-- [ ] Premium share extension strips metadata and can share the clean copy onward
-- [ ] Privacy report increments correctly
-- [ ] Onboarding shows on first launch, can be replayed from Settings
-- [ ] Analytics debug shows funnel events
+- preserve the on-device privacy model
+- do not add third-party SDKs
+- do not add cloud sync
+- do not add general networking for media processing
+- use ImageIO for image metadata I/O
+- keep temporary files cleaned up after processing
+
+If a change weakens the privacy promise, it is out of scope.
+
+## License
+
+No license file is currently included in this repository.
+
+That means the source is visible, but reuse rights are not yet formally granted beyond standard GitHub viewing/fork mechanics. Add a license if you want to permit broader reuse.
