@@ -45,12 +45,9 @@ struct VideoStripService {
         // Build a mutable movie on a background thread so we can zero all metadata:
         //   1. movie-level metadata (GPS, device info, creation date, etc.)
         //   2. every track's metadata (embedded per-track EXIF/location headers)
-        let mutableMovie: AVMutableMovie = try await withCheckedThrowingContinuation { continuation in
+        let mutableMovie: AVMutableMovie = await withCheckedContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
-                guard let movie = AVMutableMovie(url: inputURL, options: nil) else {
-                    continuation.resume(throwing: VideoStripError.exportFailed("Could not open video for metadata editing"))
-                    return
-                }
+                let movie = AVMutableMovie(url: inputURL, options: nil)
                 // Strip container-level metadata
                 movie.metadata = []
                 // Strip every track's metadata
@@ -85,12 +82,21 @@ struct VideoStripService {
             throw VideoStripError.unsupportedFormat
         }
 
-        let progressTask = Task {
-            for await state in session.states(updateInterval: 0.2) {
-                guard !Task.isCancelled else { break }
-                if case .exporting(let progress) = state {
-                    // Map 0→1 export progress to 0.25→1.0 overall progress
-                    await onProgress?(0.25 + progress.fractionCompleted * 0.75)
+        // Per-export progress reporting via session.states(updateInterval:) is
+        // iOS 18+ only. On iOS 17 we just keep the coarse 0.25 → 1.0 jump.
+        var progressTask: Task<Void, Never>?
+        if #available(iOS 18.0, *) {
+            progressTask = Task {
+                do {
+                    for try await state in session.states(updateInterval: 0.2) {
+                        guard !Task.isCancelled else { break }
+                        if case .exporting(let progress) = state {
+                            // Map 0→1 export progress to 0.25→1.0 overall progress
+                            await onProgress?(0.25 + progress.fractionCompleted * 0.75)
+                        }
+                    }
+                } catch {
+                    // Progress reporting is best-effort; ignore errors here.
                 }
             }
         }
@@ -107,15 +113,15 @@ struct VideoStripService {
                 try await group.next()
                 group.cancelAll()
             }
-            progressTask.cancel()
+            progressTask?.cancel()
             await onProgress?(1.0)
             return tmpURL
         } catch is CancellationError {
-            progressTask.cancel()
+            progressTask?.cancel()
             try? FileManager.default.removeItem(at: tmpURL)
             throw VideoStripError.cancelled
         } catch {
-            progressTask.cancel()
+            progressTask?.cancel()
             try? FileManager.default.removeItem(at: tmpURL)
             if error is VideoStripError { throw error }
             throw VideoStripError.exportFailed(error.localizedDescription)
