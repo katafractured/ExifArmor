@@ -95,6 +95,19 @@ struct SettingsView: View {
                         }
                     }
 
+                    Link(destination: URL(string: "mailto:feedback@katafract.com?subject=ExifArmor%20feedback")!) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "envelope.fill")
+                                .foregroundStyle(Color("AccentCyan"))
+                            Text("Send Feedback")
+                                .foregroundStyle(Color("TextPrimary"))
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundStyle(Color("TextSecondary"))
+                        }
+                    }
+
                     Link(destination: URL(string: "https://katafract.com/support/exifarmor")!) {
                         HStack(spacing: 12) {
                             Image(systemName: "questionmark.circle")
