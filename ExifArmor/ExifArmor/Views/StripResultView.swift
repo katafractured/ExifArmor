@@ -325,8 +325,9 @@ struct StripResultView: View {
 
     private var actionButtons: some View {
         VStack(spacing: 12) {
-            Button(action: onSave) {
+            Button(action: { KataHaptic.saved.fire(); onSave() }) {
                 Label("Save to Photo Library", systemImage: "square.and.arrow.down.fill")
+                    .accessibilityLabel("Save cleaned photos to Photo Library")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
@@ -336,8 +337,9 @@ struct StripResultView: View {
             }
 
             HStack(spacing: 12) {
-                Button(action: onShare) {
+                Button(action: { KataHaptic.saved.fire(); onShare() }) {
                     Label("Share Clean Copy", systemImage: "square.and.arrow.up")
+                    .accessibilityLabel("Share cleaned copy")
                         .font(.subheadline.weight(.medium))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
@@ -350,8 +352,9 @@ struct StripResultView: View {
                         )
                 }
 
-                Button(action: onDone) {
+                Button(action: { KataHaptic.tap.fire(); onDone() }) {
                     Text("Done")
+                        .accessibilityLabel("Return to home")
                         .font(.subheadline.weight(.medium))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)

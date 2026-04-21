@@ -42,17 +42,21 @@ struct SettingsView: View {
                                 Image(systemName: "star.fill")
                                     .foregroundStyle(Color("AccentGold"))
                                 Text("Upgrade to Pro")
+                                .accessibilityLabel("Upgrade to Pro")
                                     .foregroundStyle(Color("TextPrimary"))
                             }
                         }
 
                         Button {
+                        KataHaptic.tap.fire()
+                            KataHaptic.tap.fire()
                             Task { await store.restorePurchases() }
                         } label: {
                             HStack(spacing: 12) {
                                 Image(systemName: "arrow.clockwise")
                                     .foregroundStyle(Color("AccentCyan"))
                                 Text("Restore Purchase")
+                            .accessibilityLabel("Restore previous purchase")
                             }
                         }
                     }
@@ -92,6 +96,7 @@ struct SettingsView: View {
                             Image(systemName: "arrow.counterclockwise")
                                 .foregroundStyle(Color("AccentCyan"))
                             Text("Replay Onboarding")
+                            .accessibilityLabel("Replay onboarding tutorial")
                         }
                     }
 

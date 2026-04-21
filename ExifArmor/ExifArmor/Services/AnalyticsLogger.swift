@@ -127,9 +127,7 @@ final class AnalyticsLogger {
         saveCounts()
 
         #if DEBUG
-        let metaStr = metadata.isEmpty ? "" : " | \(metadata)"
-        print("📊 [\(event.rawValue)]\(metaStr)")
-        #endif
+        let metaStr = metadata.isEmpty ? "" : " | \(metadata)"        #endif
     }
 
     /// Convenience: log photo selection with count.

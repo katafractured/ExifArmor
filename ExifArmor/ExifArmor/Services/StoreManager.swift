@@ -250,9 +250,7 @@ final class StoreManager {
         debugLog.append("[\(timestamp)] \(message)")
         if debugLog.count > 20 {
             debugLog.removeFirst(debugLog.count - 20)
-        }
-        print("[StoreManager] \(message)")
-    }
+        }    }
 
     private func persistSharedProAccess() {
         guard let defaults = UserDefaults(suiteName: Self.appGroupID) else { return }

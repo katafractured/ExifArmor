@@ -159,6 +159,7 @@ struct ProUpgradeView: View {
                     isPurchasing = false
                     if success {
                         AnalyticsLogger.shared.log(.purchaseCompleted)
+                        KataHaptic.unlocked.fire()
                         dismiss()
                     } else {
                         AnalyticsLogger.shared.log(.purchaseCancelled)
@@ -168,6 +169,7 @@ struct ProUpgradeView: View {
                 HStack {
                     if isPurchasing {
                         ProgressView()
+                            .accessibilityLabel("Purchasing in progress")
                             .tint(Color("BackgroundDark"))
                     }
                     Text("\(store.proProduct?.displayPrice ?? "$0.99") — Unlock Pro Forever")
