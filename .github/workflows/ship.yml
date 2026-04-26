@@ -115,20 +115,10 @@ jobs:
             fi
             echo "asc_max=$ASC_MAX run_based=$RUN_BUILD using=$BUILD_NUM"
           fi
-
+          # Bump pbxproj CURRENT_PROJECT_VERSION (required for all projects)
           find . -name project.pbxproj -not -path "*/.git/*" -exec sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9][0-9]*/CURRENT_PROJECT_VERSION = $BUILD_NUM/g" {} +
-
-          # Bump all plist CFBundleVersion
+          # Bump any Info.plist CFBundleVersion entries (if they exist)
           find . -name "*.plist" -not -path "*/build/*" -not -path "*/.build/*" -not -path "*/.git/*" -exec /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $BUILD_NUM" {} \; 2>/dev/null || true
-
-          # Verify: check if at least one plist has the new version
-          VERIFIED=$(find . -name "*.plist" -not -path "*/build/*" -not -path "*/.build/*" -not -path "*/.git/*" -exec /usr/libexec/PlistBuddy -c "Print :CFBundleVersion" {} \; 2>/dev/null | grep -c "^$BUILD_NUM$" || echo 0)
-          echo "Plists bumped to version $BUILD_NUM: $VERIFIED"
-          if [ "$VERIFIED" -eq 0 ]; then
-            echo "::error::No CFBundleVersion plists were updated to $BUILD_NUM — check Info.plist path"
-            exit 1
-          fi
-
           echo "BUILD_NUM=$BUILD_NUM" >> "$GITHUB_ENV"
 
       - name: Clean
