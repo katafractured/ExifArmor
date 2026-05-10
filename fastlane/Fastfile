@@ -25,6 +25,7 @@ platform :ios do
       skip_app_version_update: true,
       overwrite_screenshots: true,
       force: true,
+      use_live_version: true,
       run_precheck_before_submit: false
     )
   end
@@ -44,6 +45,7 @@ platform :ios do
       skip_app_version_update: true,
       overwrite_screenshots: true,
       force: true,
+      use_live_version: true,
       run_precheck_before_submit: false
     )
   end
