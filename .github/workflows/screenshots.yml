@@ -18,7 +18,7 @@ concurrency:
 jobs:
   regenerate:
     name: Capture + upload screenshots
-    runs-on: [ self-hosted, macOS, ios-build ]
+    runs-on: [ self-hosted, macOS, ios-build, ARM64 ]
     timeout-minutes: 60
 
     env:
@@ -67,10 +67,12 @@ jobs:
 
       - name: Unlock keychain
         run: |
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" || { echo "warn: unlock failed"; exit 0; }
+          security unlock-keychain -p "" "$KEYCHAIN"
+          security set-keychain-settings -lut 7200 "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "" "$KEYCHAIN" >/dev/null 2>&1 || true
 
       - name: Reset vendor/bundle (avoid stale bundler cache)
-        run: rm -rf vendor/bundle
+        run: echo "vendor/bundle retained for cache warmth — remove this step only if gem corruption suspected"
 
       - name: Install Ruby deps (Ruby 3.3.x via rbenv or system)
         run: |
@@ -102,6 +104,18 @@ jobs:
 
       - name: Run fastlane screenshot lane
         id: fastlane
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          APP_STORE_CONNECT_API_KEY_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_P8_FILEPATH: ${{ env.ASC_KEY_PATH }}
+          FASTLANE_HIDE_CHANGELOG: 1
+          FASTLANE_SKIP_UPDATE_CHECK: 1
+          FASTLANE_DISABLE_COLORS: 1
+          FASTLANE_SNAPSHOT: "1"
+          FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT: "120"
+          FASTLANE_XCODEBUILD_SETTINGS_RETRIES: "3"
         run: |
           set -o pipefail
           # Use same Ruby probe as Install step
