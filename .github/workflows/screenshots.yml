@@ -18,7 +18,7 @@ concurrency:
 jobs:
   regenerate:
     name: Capture + upload screenshots
-    runs-on: [ self-hosted, macOS, ios-build, ARM64 ]
+    runs-on: [ self-hosted, macOS, ios-build ]
     timeout-minutes: 60
 
     env:
@@ -153,12 +153,13 @@ jobs:
 
       - name: Clone docs-internal + commit screenshot logs
         if: always()
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           LOG_DIR="/tmp/docs-internal-logs"
           rm -rf "$LOG_DIR"
-          git clone --depth 1 "https://github.com/${DOCS_INTERNAL_REPO}.git" "$LOG_DIR"
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/${DOCS_INTERNAL_REPO}.git" "$LOG_DIR"
           TS=$(date -u +%Y%m%d-%H%M%S)
           TAIL=$(tail -50 /tmp/fastlane.log 2>/dev/null || echo "no logs")
           mkdir -p "$LOG_DIR/runbooks/screenshot_runs"
@@ -184,6 +185,7 @@ jobs:
           git config user.email "ci@katafract.com"
           git add runbooks/screenshot_runs/
           git commit -m "screenshots: ${APP_NAME} run ${TS} (#${{ github.run_number }})" || { echo "nothing to commit"; exit 0; }
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${DOCS_INTERNAL_REPO}.git"
           git push origin main
 
       - name: Notify Matrix - screenshot run SUCCEEDED
