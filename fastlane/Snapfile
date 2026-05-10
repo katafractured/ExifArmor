@@ -2,6 +2,8 @@
 
 project("./ExifArmor.xcodeproj")
 
+ios_version("26.4.1")
+
 devices([
   "iPhone 17 Pro Max",
   "iPad Pro 13-inch (M5)"
