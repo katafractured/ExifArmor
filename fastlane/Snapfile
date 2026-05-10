@@ -2,11 +2,13 @@
 
 project("./ExifArmor.xcodeproj")
 
-ios_version("18.0")
+# cmfmbp (ARM64) runtime is "iOS 26.4" in simctl text but actual version 26.4.1.
+# Monkey-patch in Fastfile remaps os_version so fastlane uses UDID destinations.
+ios_version("26.4.1")
 
 devices([
-  "iPhone 16 Pro Max",
-  "iPad Pro 13-inch (M4)",
+  "iPhone 17 Pro Max",
+  "iPad Pro 13-inch (M5)",
 ])
 
 languages(["en-US"])

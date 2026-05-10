@@ -1,6 +1,36 @@
 # Katafract screenshot pipeline — fastlane lanes
 # Doctrine: feedback_screenshots_never_manual.md — every UI change auto-refreshes.
 
+# simctl text labels iOS 26.4.1 runtime as "-- iOS 26.4 --"; fastlane reads
+# os_version="26.4" and falls back to name+OS destination instead of UDID,
+# which xcodebuild rejects. Remap to actual patch version via simctl JSON.
+require 'json'
+require 'fastlane_core/device_manager'
+module FastlaneCore
+  class DeviceManager
+    class << self
+      unless respond_to?(:_sims_pre_patch)
+        alias_method :_sims_pre_patch, :simulators
+        def simulators(requested_os_version: nil)
+          devs = _sims_pre_patch(requested_os_version: nil)
+          begin
+            runtimes = JSON.parse(`xcrun simctl list runtimes --json 2>/dev/null`)["runtimes"]
+            map = runtimes.each_with_object({}) do |rt, h|
+              display = rt["name"].sub(/^iOS /, "")
+              actual  = rt["version"]
+              h[display] = actual if actual && display != actual
+            end
+            devs.each { |d| d.os_version = map[d.os_version] if d.os_type == "iOS" && map[d.os_version] }
+          rescue => e
+            UI.important("sim-version-patch: #{e.message}")
+          end
+          requested_os_version ? devs.select { |d| d.os_version == requested_os_version } : devs
+        end
+      end
+    end
+  end
+end
+
 default_platform(:ios)
 
 platform :ios do
