@@ -69,13 +69,15 @@ struct MockDataSeeder {
 
         var metadata = PhotoMetadata(image: image, imageData: imageData)
         metadata.sourceUTI = "public.jpeg"
+        // Park Slope, Brooklyn — residential brownstone block
         metadata.latitude = 40.6782
-        metadata.longitude = -73.9442
+        metadata.longitude = -73.9796
+        metadata.altitude = 24.0
         metadata.deviceMake = "Apple"
-        metadata.deviceModel = "iPhone 15 Pro"
-        metadata.software = "iOS 18.0"
-        metadata.lensModel = "iPhone 15 Pro back triple camera 6.86mm f/1.78"
-        metadata.dateTimeOriginal = "2026-04-28T14:32:00"
+        metadata.deviceModel = "iPhone 16 Pro"
+        metadata.software = "iOS 18.4.1"
+        metadata.lensModel = "iPhone 16 Pro back triple camera 6.86mm f/1.78"
+        metadata.dateTimeOriginal = "2026-04-28T06:47:00"
         metadata.focalLength = 6.86
         metadata.aperture = 1.78
         metadata.exposureTime = 1.0 / 1000.0
@@ -94,13 +96,15 @@ struct MockDataSeeder {
 
         var metadata = PhotoMetadata(image: image, imageData: imageData)
         metadata.sourceUTI = "public.jpeg"
-        metadata.latitude = 41.8781
-        metadata.longitude = -87.6298
+        // Lincoln Park, Chicago — residential neighborhood, not downtown
+        metadata.latitude = 41.9215
+        metadata.longitude = -87.6350
+        metadata.altitude = 180.0
         metadata.deviceMake = "Apple"
         metadata.deviceModel = "iPhone 14 Pro"
         metadata.software = "iOS 17.5"
-        metadata.lensModel = "iPhone 14 Pro back dual camera 6.86mm f/1.78"
-        metadata.dateTimeOriginal = "2026-04-26T09:14:00"
+        metadata.lensModel = "iPhone 14 Pro back triple camera 6.86mm f/1.78"
+        metadata.dateTimeOriginal = "2026-04-26T07:38:00"
         metadata.focalLength = 6.86
         metadata.aperture = 1.78
         metadata.exposureTime = 1.0 / 500.0
@@ -119,13 +123,15 @@ struct MockDataSeeder {
 
         var metadata = PhotoMetadata(image: image, imageData: imageData)
         metadata.sourceUTI = "public.jpeg"
-        metadata.latitude = 47.6062
-        metadata.longitude = -122.3321
+        // Fremont, Seattle — residential neighborhood
+        metadata.latitude = 47.6512
+        metadata.longitude = -122.3494
+        metadata.altitude = 52.0
         metadata.deviceMake = "Apple"
         metadata.deviceModel = "iPhone 13"
         metadata.software = "iOS 17.0"
         metadata.lensModel = "iPhone 13 back dual camera 6mm f/1.6"
-        metadata.dateTimeOriginal = "2026-04-22T16:45:00"
+        metadata.dateTimeOriginal = "2026-04-22T08:52:00"
         metadata.focalLength = 6.0
         metadata.aperture = 1.6
         metadata.exposureTime = 1.0 / 250.0
@@ -144,13 +150,15 @@ struct MockDataSeeder {
 
         var metadata = PhotoMetadata(image: image, imageData: imageData)
         metadata.sourceUTI = "public.jpeg"
-        metadata.latitude = 34.0522
-        metadata.longitude = -118.2437
+        // Silver Lake, Los Angeles — residential neighborhood
+        metadata.latitude = 34.0871
+        metadata.longitude = -118.2704
+        metadata.altitude = 118.0
         metadata.deviceMake = "Apple"
         metadata.deviceModel = "iPhone 15"
         metadata.software = "iOS 18.0"
         metadata.lensModel = "iPhone 15 back dual camera 6.1mm f/1.6"
-        metadata.dateTimeOriginal = "2026-04-20T11:08:00"
+        metadata.dateTimeOriginal = "2026-04-20T09:15:00"
         metadata.focalLength = 6.1
         metadata.aperture = 1.6
         metadata.exposureTime = 1.0 / 120.0
